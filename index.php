@@ -39,15 +39,8 @@ while ($pirmoFailoPavadinimas !== false) {
         && 
         $failoInformacija['extension'] == 'php'
     ) {
-        echo '<a href="index_1.php?failas=' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-file">' . $pirmoFailoPavadinimas . '</span></a>' .  '<br>';
-        
-    } elseif (isset($failoInformacija['extension'])
-        && 
-        $failoInformacija['extension'] == 'php'
-    ) {
-        echo '<a href="index_vidurkis.php?failas=' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-file">' . $pirmoFailoPavadinimas . '</span></a>' .  '<br>';
+        echo '<a href="' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-file">' . $pirmoFailoPavadinimas . '</span></a>' .  '<br>';        
             
     } elseif (isset($failoInformacija['extension'])
         && 
