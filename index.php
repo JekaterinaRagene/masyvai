@@ -10,25 +10,32 @@
 </html> 
 
 <?php
-$katalogas = '.';
+// katalogas is $_GET'O
+if (isset($_GET['failas'])) {
+    $katalogas = str_replace('../', '', $_GET['failas']);
+} else {
+    $katalogas = '.';
+}
+
 $resource = opendir($katalogas);
 
 
 while(($pirmoFailoPavadinimas = readdir($resource)) !== false) {
-    $failoLokalusKelias = $katalogas . '/' . $pirmoFailoPavadinimas;
-    if (isset($_GET['failoLokalusKelias'])) {
-    $pirmoFailoPavadinimas = str_replace('../', './', $_GET['pirmoFailoPavadinimas']);
-    return basePath('../failai/') . $pirmoFailoPavadinimas;
+    if ($pirmoFailoPavadinimas == '..' || $pirmoFailoPavadinimas == '.') {
+        continue;
     }
+    $failoLokalusKelias = $katalogas . '/' . $pirmoFailoPavadinimas;
+
+    $failoInformacija = pathinfo($failoLokalusKelias);
+    
     if (is_file($failoLokalusKelias)) {
-        echo " FAILAS";
+        //echo " FAILAS";
     }
         //var_dump( is_dir($pirmoFailoPavadinimas) );
     if (is_dir($failoLokalusKelias)) {
-        echo " KATALOGAS";
-    }
-      
-    if (isset($failoInformacija['extension'])
+        echo '<a href="?failas=' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-folder-close">' . $pirmoFailoPavadinimas . '</span> </a>' .  '<br>';
+    } elseif (isset($failoInformacija['extension'])
         && 
         $failoInformacija['extension'] == 'php'
     ) {
@@ -38,19 +45,17 @@ while(($pirmoFailoPavadinimas = readdir($resource)) !== false) {
         && 
         $failoInformacija['extension'] == 'jpg'
     ) { 
-        echo '<a href="' . $failoLokalusKelias. ' class="btn btn-info btn-lg">
+        echo '<a href="' . $failoLokalusKelias. '" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-picture">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';
     } elseif (isset($failoInformacija['extension']) 
             &&
             $failoInformacija['extension'] == 'html'
     ) {
-        echo '<a href="' . $failoLokalusKelias. ' class="btn btn-info btn-lg">
+        echo '<a href="' . $failoLokalusKelias. '" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-html">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';    
-    }
-            {
-        echo '<a href=" class="btn btn-info btn-lg">
+    } else {
+        echo '<a href="" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-folder-close">' . $pirmoFailoPavadinimas . '</span> </a>' .  '<br>';
-    
     }
     
     
