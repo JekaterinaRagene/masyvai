@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,47 +10,45 @@
 </html> 
 
 <?php
-
 $katalogas = '.';
 $resource = opendir($katalogas);
 
-$pirmoFailoPavadinimas = readdir($resource);
 
-while ($pirmoFailoPavadinimas !== false) {
+while(($pirmoFailoPavadinimas = readdir($resource)) !== false) {
     $failoLokalusKelias = $katalogas . '/' . $pirmoFailoPavadinimas;
-    //echo $pirmoFailoPavadinimas;
-    //echo $failoLokalusKelias . '<br>';
-    //var_dump(is_file($failoLokalusKelias));
-    
-    $failoInformacija = pathinfo($failoLokalusKelias);
-    
+    if (isset($_GET['failoLokalusKelias'])) {
+    $pirmoFailoPavadinimas = str_replace('../', './', $_GET['pirmoFailoPavadinimas']);
+    return basePath('../failai/') . $pirmoFailoPavadinimas;
+    }
     if (is_file($failoLokalusKelias)) {
-//        echo '<a href="" class="btn btn-info btn-lg">
-//          <span class="glyphicon glyphicon-file"></span></a>' .  '<br>';
-                       
+        echo " FAILAS";
     }
-    
-    //var_dump( is_dir($pirmoFailoPavadinimas) );
+        //var_dump( is_dir($pirmoFailoPavadinimas) );
     if (is_dir($failoLokalusKelias)) {
-        //echo '<a href="' . $pirmoFailoPavadinimas . '" class="btn btn-info btn-lg">
-          //<span class="glyphicon glyphicon-folder-close"></span> </a>' .  '<br>';
+        echo " KATALOGAS";
     }
-    
+      
     if (isset($failoInformacija['extension'])
         && 
         $failoInformacija['extension'] == 'php'
     ) {
-        echo '<a href="' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-file">' . $pirmoFailoPavadinimas . '</span></a>' .  '<br>';        
+        echo '<a href="metai.php?failas=' . $failoLokalusKelias . '">' . $pirmoFailoPavadinimas . '</a>';        
             
     } elseif (isset($failoInformacija['extension'])
         && 
         $failoInformacija['extension'] == 'jpg'
     ) { 
-        echo '<a href="nuotrauka.jpg"failas=' . $failoLokalusKelias . ' class="btn btn-info btn-lg">
+        echo '<a href="' . $failoLokalusKelias. ' class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-picture">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';
-    } else {
-        echo '<a href="css"failas=' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
+    } elseif (isset($failoInformacija['extension']) 
+            &&
+            $failoInformacija['extension'] == 'html'
+    ) {
+        echo '<a href="' . $failoLokalusKelias. ' class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-html">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';    
+    }
+            {
+        echo '<a href=" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-folder-close">' . $pirmoFailoPavadinimas . '</span> </a>' .  '<br>';
     
     }
@@ -62,6 +61,5 @@ while ($pirmoFailoPavadinimas !== false) {
     $pirmoFailoPavadinimas = readdir($resource);
     
 }
-
 closedir($resource);
 ?>
