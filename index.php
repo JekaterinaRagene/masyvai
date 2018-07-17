@@ -39,23 +39,22 @@ while(($pirmoFailoPavadinimas = readdir($resource)) !== false) {
         && 
         $failoInformacija['extension'] == 'php'
     ) {
-        echo '<a href="metai.php?failas=' . $failoLokalusKelias . '">' . $pirmoFailoPavadinimas . '</a>';        
+        echo '<a href="?failas=' . $failoLokalusKelias . '" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-file">' . $pirmoFailoPavadinimas . '</span> </a>' .  '<br>';        
             
     } elseif (isset($failoInformacija['extension'])
         && 
         $failoInformacija['extension'] == 'jpg'
     ) { 
-        echo '<a href="' . $failoLokalusKelias. '" class="btn btn-info btn-lg">
+        echo '<a href="?failas='  . $failoLokalusKelias. '" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-picture">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';
     } elseif (isset($failoInformacija['extension']) 
             &&
             $failoInformacija['extension'] == 'html'
     ) {
-        echo '<a href="' . $failoLokalusKelias. '" class="btn btn-info btn-lg">
+        echo '<a href="?failas='  . $failoLokalusKelias. '" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-html">' . $pirmoFailoPavadinimas . '</span>' . '</a>' . '<br>';    
     } else {
-        echo '<a href="" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-folder-close">' . $pirmoFailoPavadinimas . '</span> </a>' .  '<br>';
     }
     
     
