@@ -1,5 +1,4 @@
 <?php
-
 session_start();
  function login()
  {
@@ -11,10 +10,11 @@ session_start();
      return isset($_SESSION['prisijunges']);
  }
  
-// $slaptazodis = 'slaptazodis';
+// $slaptazodis = 'raktazodis';
 // $hash = password_hash($slaptazodis, PASSWORD_DEFAULT);
- $hash = '$2y$10$Upv7t.GxPMfiERxkRTuA4egMj99sxBiu6LyWEfHSQbr2ogsPmY0Zm';
- $password = 'slaptazodis';
+// echo $hash;
+ $hash = '$2y$10$PQbtI8oPUFDCVotA/3Ge7ewidPU1GQQyPWFh.ITVzro96hcd9x3MW';
+ 
  if(isset($_POST['password'])) {
      
      if (password_verify($_POST['password'], $hash)) {
@@ -23,8 +23,13 @@ session_start();
          echo ' slaptazodis neteisingas';
      }
  }
- if (arPrisijunges() == true) {
+ if (arPrisijunges() === true) {
      echo "Prisijunges";
+     require 'index_veikia.php';
  } else {
      echo "Neprisijunges";
  }
+ 
+ 
+ ?>
+

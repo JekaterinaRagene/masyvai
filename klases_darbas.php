@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 $ceu = ["Italy"=>"Rome", "Luxembourg"=>"Luxembourg", "Belgium"=>
 "Brussels",
 "Denmark"=>"Copenhagen", "Finland"=>"Helsinki", "France" => "Paris",

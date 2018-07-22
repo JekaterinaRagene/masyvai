@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 $menesiuVardai = [1=>'Sausis',
                         2=>'Vasaris', 3=>'Kovas',
                         4=>'Balandis', 5=>'Gegužė',                        

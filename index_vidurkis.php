@@ -1,4 +1,5 @@
 <?php
+session_start();
 print '<h2>Vidurkio skaičiuoklė</h2>';
 ?>
 <html>
